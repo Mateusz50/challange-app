@@ -1,72 +1,46 @@
-﻿int number = 4565;
-string numberAsString = number.ToString();
-char[] letters = numberAsString.ToArray();
+﻿using challange_app;
 
-int counter0 = 0;
-int counter1 = 0;
-int counter2 = 0;
-int counter3 = 0;
-int counter4 = 0;
-int counter5 = 0;
-int counter6 = 0;
-int counter7 = 0;
-int counter8 = 0;
-int counter9 = 0;
 
-foreach (char letter in letters)
+Employee employer1 = new Employee("Kamil", "Woźniak", "28");
+Employee employer2 = new Employee("Tomek", "Źniak", "30");
+Employee employer3 = new Employee("Emil", "Kniak", "45");
+
+
+employer1.AddScore(5);
+employer1.AddScore(7);
+employer1.AddScore(1);
+employer1.AddScore(4);
+employer1.AddScore(9);
+var result = employer1.Result;
+
+
+employer2.AddScore(10);
+employer2.AddScore(2);
+employer2.AddScore(3);
+employer2.AddScore(4);
+employer2.AddScore(10);
+var result2 = employer2.Result;
+
+
+employer3.AddScore(5);
+employer3.AddScore(1);
+employer3.AddScore(1);
+employer3.AddScore(1);
+employer3.AddScore(1);
+var result3 = employer3.Result;
+
+
+if (result > result2 && result > result3)
 {
-    if (letter == '0')
-    {
-
-        counter0++;
-    }
-    else if (letter == '1')
-    {
-        counter1++;
-    }
-    else if (letter == '2')
-    {
-        counter2++;
-    }
-    else if (letter == '3')
-    {
-        counter3++;
-    }
-    else if (letter == '4')
-    {
-        counter4++;
-    }
-    else if (letter == '5')
-    {
-        counter5++;
-    }
-    else if (letter == '6')
-    {
-        counter6++;
-    }
-    else if (letter == '7')
-    {
-        counter7++;
-    }
-    else if (letter == '8')
-    {
-        counter8++;
-    }
-    else if (letter == '9')
-    {
-        counter9++;
-    }
-
-
+    Console.WriteLine("Osoba " + employer1.Name + " " + employer1.Surname + " w wieku " + employer1.Age + " lat " + " uzyskał/a punktów " + result + " co klasyfikuje go/ją na pierwsze miejsce");
 }
-Console.WriteLine(number);
-Console.WriteLine("w tej liczbie jest -" + counter0 + "   zer");
-Console.WriteLine("w tej liczbie jest -" + counter1 + "    jedynek");
-Console.WriteLine("w tej liczbie jest -" + counter2 + "   dwujek");
-Console.WriteLine("w tej liczbie jest -" + counter3 + "  trójek");
-Console.WriteLine("w tej liczbie jest -" + counter4 + "  czwórek");
-Console.WriteLine("w tej liczbie jest -" + counter5 + "   piątek");
-Console.WriteLine("w tej liczbie jest -" + counter6 + "  szóstek");
-Console.WriteLine("w tej liczbie jest -" + counter7 + "   siódemek");
-Console.WriteLine("w tej liczbie jest -" + counter8 + "  ósemek");
-Console.WriteLine("w tej liczbie jest -" + counter9 + "   dziewiątek");
+else if (result2 > result3 && result2 > result)
+{
+    Console.WriteLine("Osoba " + employer2.Name + " " + employer2.Surname + " w wieku " + employer2.Age + " lat " + " uzyskał/a punktów " + result2 + " co klasyfikuje go/ją na pierwsze miejsce");
+}
+else if (result3 > result && result3 > result2)
+{
+    Console.WriteLine("Osoba " + employer3.Name + " " + employer3.Surname + " w wieku " + employer3.Age + " lat " + " uzyskał/a punktów " + result3 + " co klasyfikuje go/ją na pierwsze miejsce");
+}
+
+
