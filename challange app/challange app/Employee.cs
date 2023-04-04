@@ -4,31 +4,43 @@ namespace challange_app
 {
     public class Employee
     {
-        private List<int> score = new List<int>();
+        private List<float> grades = new List<float>();
 
-        public Employee(string name, string surname, string age)
+        public Employee(string name, string surname)
         {
             this.Name = name;
             this.Surname = surname;
-            this.Age = age;
         }
         public string Name { get; private set; }
 
+
         public string Surname { get; private set; }
 
-        public string Age { get; private set; }
-        public int Result
+        public void AddGrade(float grade) 
+        
         {
+            this.grades.Add(grade);
 
-            get
+        }
+
+        public Statistics GetStatistics() 
+        {
+            var statistics= new Statistics();
+            statistics.Average = 0;
+            statistics.Max = float.MinValue;
+            statistics.Min = float.MaxValue;
+
+            foreach(var grade in this.grades)
             {
-                return this.score.Sum();
+                statistics.Max=Math.Max(statistics.Max, grade);
+                statistics.Min = Math.Min(statistics.Min, grade);
+                statistics.Average += grade;
             }
+            statistics.Average/=grades.Count;
+            
+
+            return statistics;
         }
 
-        public void AddScore(int number)
-        {
-            this.score.Add(number);
-        }
     }
 }
