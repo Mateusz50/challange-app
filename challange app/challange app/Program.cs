@@ -2,7 +2,8 @@
 
 
 var Employee = new Employee("Mateusz", "Świderski");
-Employee.AddGrade(2);
+Employee.AddGrade("mateusz");
+Employee.AddGrade(200);
 Employee.AddGrade(2);
 Employee.AddGrade(6);
 var statistics = Employee.GetStatistics();

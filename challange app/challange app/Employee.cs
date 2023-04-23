@@ -16,28 +16,85 @@ namespace challange_app
 
         public string Surname { get; private set; }
 
-        public void AddGrade(float grade) 
-        
+        public void AddGrade(float grade)
+
         {
-            this.grades.Add(grade);
+            if (grade >= 0 && grade <= 100)
+            {
+                this.grades.Add(grade);
+            }
+            else
+            {
+                Console.WriteLine("Invalid grade value");
+            }
+
 
         }
 
-        public Statistics GetStatistics() 
+        public void AddGrade(string grade)
+
         {
-            var statistics= new Statistics();
+            if (float.TryParse(grade, out float result))
+            {
+
+                this.AddGrade(result);
+            }
+            else
+            {
+                Console.WriteLine("String is not float");
+            }
+
+
+        }
+
+        public void AddGrade(double grade)
+
+        {
+
+            this.AddGrade((float)grade);
+
+
+        }
+        public void AddGrade(int grade)
+
+        {
+
+            this.AddGrade((float)grade);
+
+
+        }
+        public void AddGrade(long grade)
+
+        {
+
+            this.AddGrade((float)grade);
+
+
+        }
+        public void AddGrade(decimal grade)
+
+        {
+            
+            this.AddGrade((float)grade);
+
+
+        }
+
+        public Statistics GetStatistics()
+        {
+            var statistics = new Statistics();
             statistics.Average = 0;
             statistics.Max = float.MinValue;
             statistics.Min = float.MaxValue;
 
-            foreach(var grade in this.grades)
+            foreach (var grade in this.grades)
             {
-                statistics.Max=Math.Max(statistics.Max, grade);
+                statistics.Max = Math.Max(statistics.Max, grade);
                 statistics.Min = Math.Min(statistics.Min, grade);
                 statistics.Average += grade;
             }
-            statistics.Average/=grades.Count;
-            
+            statistics.Average /= grades.Count;
+
 
             return statistics;
         }
