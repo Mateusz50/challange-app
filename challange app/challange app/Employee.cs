@@ -1,13 +1,13 @@
-﻿
-
-using System.Diagnostics;
+﻿using System.Diagnostics;
 
 namespace challange_app
 {
     public class Employee
     {
         private List<float> grades = new List<float>();
-
+        public Employee() 
+        {
+        }
         public Employee(string name, string surname)
         {
             this.Name = name;
@@ -15,11 +15,9 @@ namespace challange_app
         }
         public string Name { get; private set; }
 
-
         public string Surname { get; private set; }
 
         public void AddGrade(float grade)
-
         {
             if (grade >= 0 && grade <= 100)
             {
@@ -30,9 +28,36 @@ namespace challange_app
                 Console.WriteLine("Invalid grade value");
             }
         }
-
+        public void AddGrade(char grade)
+        {
+            switch (grade)
+            {
+                case 'A':
+                case 'a':
+                    this.AddGrade(100);
+                    break;
+                case 'B':
+                case 'b':
+                    this.AddGrade(80);
+                    break;
+                case 'C':
+                case 'c':
+                    this.AddGrade(60);
+                    break;
+                case 'D':
+                case 'd':
+                    this.AddGrade(40);
+                    break;
+                case 'E':
+                case 'e':
+                    this.AddGrade(20);
+                    break;
+                default:
+                    Console.WriteLine("Wrong Letter");
+                    break;
+            }
+        }
         public void AddGrade(string grade)
-
         {
             if (float.TryParse(grade, out float result))
             {
@@ -44,28 +69,6 @@ namespace challange_app
                 Console.WriteLine("String is not float");
             }
         }
-
-        public void AddGrade(double grade)
-
-        {
-            this.AddGrade((float)grade);
-        }
-        public void AddGrade(int grade)
-
-        {
-            this.AddGrade((float)grade);
-        }
-        public void AddGrade(long grade)
-
-        {
-            this.AddGrade((float)grade);
-        }
-        public void AddGrade(decimal grade)
-
-        {
-            this.AddGrade((float)grade);
-        }
-
         public Statistics GetStatistics()
         {
             var statistics = new Statistics();
@@ -75,84 +78,33 @@ namespace challange_app
 
             foreach (var grade in this.grades)
             {
-                statistics.Max = Math.Max(statistics.Max, grade);
-                statistics.Min = Math.Min(statistics.Min, grade);
-                statistics.Average += grade;
+                if (grade >= 0)
+                {
+                    statistics.Max = Math.Max(statistics.Max, grade);
+                    statistics.Min = Math.Min(statistics.Min, grade);
+                    statistics.Average += grade;
+                }
             }
             statistics.Average /= grades.Count;
-            return statistics;
-        }
-
-        public Statistics GetStatisticsWithDoWhile()
-        {
-            var statistics = new Statistics();
-            statistics.Average = 0;
-            statistics.Max = float.MinValue;
-            statistics.Min = float.MaxValue;
-            var index = 0;
-            do
+            switch(statistics.Average)
             {
-                index++;
-                statistics.Max = Math.Max(statistics.Max, this.grades[index]);
-                statistics.Min = Math.Min(statistics.Min, this.grades[index]);
-                statistics.Average += this.grades[index];
-
-            } while (index < this.grades.Count);
-
-            statistics.Average /= grades.Count;
-            return statistics;
-        }
-
-        public Statistics GetStatisticsWithWhile()
-        {
-            var statistics = new Statistics();
-            statistics.Average = 0;
-            statistics.Max = float.MinValue;
-            statistics.Min = float.MaxValue;
-            var index = 0;
-            while (index < this.grades.Count) 
-            {
-                index++;
-                statistics.Max = Math.Max(statistics.Max, this.grades[index]);
-                statistics.Min = Math.Min(statistics.Min, this.grades[index]);
-                statistics.Average += this.grades[index];
+                case var average when average >= 80:
+                    statistics.AverageLetter = 'A';
+                    break;
+                case var average when average >= 60:
+                    statistics.AverageLetter = 'B';
+                    break;
+                case var average when average >= 40:
+                    statistics.AverageLetter = 'C';
+                    break;
+                case var average when average >= 20:
+                    statistics.AverageLetter = 'D';
+                    break;
+                default:
+                    statistics.AverageLetter = 'E';
+                    break;
             }
-            statistics.Average /= grades.Count;
             return statistics;
         }
-        public Statistics GetStatisticsWithFor()
-        {
-            var statistics = new Statistics();
-            statistics.Average = 0;
-            statistics.Max = float.MinValue;
-            statistics.Min = float.MaxValue;
-            var index = 0;
-            for (index=0; index < this.grades.Count;index++)
-            {
-                statistics.Max = Math.Max(statistics.Max, this.grades[index]);
-                statistics.Min = Math.Min(statistics.Min, this.grades[index]);
-                statistics.Average += this.grades[index];
-            }
-            statistics.Average /= grades.Count;
-            return statistics;
-        }
-        public Statistics GetStatisticsWithForeach()
-        {
-            var statistics = new Statistics();
-            statistics.Average = 0;
-            statistics.Max = float.MinValue;
-            statistics.Min = float.MaxValue;
-
-            foreach (var grade in this.grades)
-            {
-                statistics.Max = Math.Max(statistics.Max, grade);
-                statistics.Min = Math.Min(statistics.Min, grade);
-                statistics.Average += grade;
-            }
-            statistics.Average /= grades.Count;
-            return statistics;
-        }
-
-
     }
 }

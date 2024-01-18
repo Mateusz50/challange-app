@@ -49,5 +49,20 @@ namespace challange_app.Test
 
             Assert.AreEqual(4, statistics.Average);
         }
+        [Test]
+        public void whenEmployerGetNewGradeAsALetter_thenShowCorectValue ()
+        {
+            //arrange
+            var Employee= new Employee("Marek" , "Kocy³a");
+            Employee.AddGrade(100);
+            Employee.AddGrade(40);
+            Employee.AddGrade('A');
+
+            //act
+            var statistics = Employee.GetStatistics();
+            //assert
+            Assert.AreEqual('A', statistics.AverageLetter);
+
+        }
     }
 }
